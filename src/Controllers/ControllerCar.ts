@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import ICar from '../Interfaces/ICar';
+// import ExceptionHttp from '../util/exception.http';
 import ServiceCar from '../Services/ServiceCar';
 
 export default class CarController {
@@ -42,11 +43,28 @@ export default class CarController {
   };
   public idGetBy = async () => {
     const { id } = this.req.params;
+
     try {
-      const { status, message } = await this.service.idGetBy(id);
-      return this.res.status(status).json(typeof message === 'string' ? { message } : message);
+      const car = await this.service.idGetBy(id);
+
+      if (!car) return this.res.status(404).json({ message: 'Car not found' });
+
+      return this.res.status(200).json(car);
     } catch (error) {
-      this.next(error);
+      return this.res.status(422).json({ message: 'Invalid mongo id' });
+    }
+  };
+  public update = async () => {
+    const { id } = this.req.params;
+    const changedCar = this.req.body;
+    try {
+      const updatedCar = await this.service.carUpdate(id, changedCar);
+
+      if (!updatedCar) return this.res.status(404).json({ message: 'Car not found' });
+
+      return this.res.status(200).json(updatedCar);
+    } catch (error) {
+      return this.res.status(422).json({ message: 'Invalid mongo id' });
     }
   };
 }

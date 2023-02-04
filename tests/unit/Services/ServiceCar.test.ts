@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 import ServiceCar from '../../../src/Services/ServiceCar';
-import { mockInputCar, mockOutputCar } from '../mock/carMock';
+import { mockCarWithoutStatus, mockInputCar, mockOutputCar } from '../mock/carMock';
 
 describe('ServiceCar tests', function () {
-  describe('/cars rout test with GET', function () {
+  describe('/cars route test with GET', function () {
     it('should return all cars at make a get in route /cars', async function () {
       sinon.stub(Model, 'find').resolves(mockOutputCar);
       const service = new ServiceCar();
@@ -22,11 +22,17 @@ describe('ServiceCar tests', function () {
       }
     });
   });
-  describe('/cars routs tests with POST', function () {
+  describe('/cars route tests with POST', function () {
     it('Should create a new car with sucess', async function () {
       sinon.stub(Model, 'create').resolves(mockOutputCar[0]);
       const service = new ServiceCar();
       const result = await service.carCreate(mockInputCar);
+      expect(result).to.be.deep.equal(mockOutputCar[0]);
+    });
+    it('Should create a carro if status attribute is not passed with sucess', async function () {
+      sinon.stub(Model, 'create').resolves(mockOutputCar[0]);
+      const service = new ServiceCar();
+      const result = await service.carCreate(mockCarWithoutStatus);
       expect(result).to.be.deep.equal(mockOutputCar[0]);
     });
   });

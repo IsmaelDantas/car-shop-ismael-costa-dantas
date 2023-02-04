@@ -21,4 +21,13 @@ const mockOutputCar = [{
   seatsQty: 5,
 }];
 
-export { mockInputCar, mockOutputCar };
+const mockCarWithoutStatus: ICar = {
+  model: 'Marea',
+  year: 2002,
+  color: 'Black',
+  buyValue: 15.990,
+  doorsQty: 4,
+  seatsQty: 5,
+};
+
+export { mockInputCar, mockOutputCar, mockCarWithoutStatus };
