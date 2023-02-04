@@ -1,16 +1,16 @@
 import { isValidObjectId } from 'mongoose';
 import Cars from '../Domains/Cars';
-import ICars from '../Interfaces/ICars';
+import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
 
 export default class CarService {
-  private carDomainCreate = (car: ICars): Cars | null => {
+  private carDomainCreate = (car: ICar): Cars | null => {
     if (car) {
       return new Cars(car);
     }
     return null;
   };
-  public carCreate = async (car: ICars) => {
+  public carCreate = async (car: ICar) => {
     const carODM = new CarODM();
     const createdCar = await carODM.create({ ...car, status: car.status || false });
     return this.carDomainCreate(createdCar);

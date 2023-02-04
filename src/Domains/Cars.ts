@@ -1,4 +1,4 @@
-import ICars from '../Interfaces/ICars';
+import ICar from '../Interfaces/ICar';
 
 export default class Car {
   protected id?: string;
@@ -10,7 +10,7 @@ export default class Car {
   private doorsQty: number;
   private seatsQty: number;
   
-  constructor(obj: ICars) {
+  constructor(obj: ICar) {
     this.id = obj.id;
     this.model = obj.model;
     this.year = obj.year;

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import ICars from '../Interfaces/ICars';
+import ICar from '../Interfaces/ICar';
 import ServiceCar from '../Services/ServiceCar';
 
 export default class CarController {
@@ -16,7 +16,7 @@ export default class CarController {
   }
 
   public create = async () => {
-    const car: ICars = {
+    const car: ICar = {
       model: this.req.body.model,
       year: this.req.body.year,
       color: this.req.body.color,
