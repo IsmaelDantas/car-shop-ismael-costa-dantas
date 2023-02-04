@@ -1,12 +1,12 @@
 import { isValidObjectId } from 'mongoose';
-import Cars from '../Domains/Cars';
+import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
 
 export default class CarService {
-  private carDomainCreate = (car: ICar): Cars | null => {
+  private carDomainCreate = (car: ICar): Car | null => {
     if (car) {
-      return new Cars(car);
+      return new Car(car);
     }
     return null;
   };
