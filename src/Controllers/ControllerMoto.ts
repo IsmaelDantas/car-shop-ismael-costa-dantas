@@ -17,9 +17,31 @@ export default class ControllerMoto {
     const moto: IMotorcycle = this.req.body;
     try {
       const motoNew = await this.service.motoCreate(moto);
+      
       return this.res.status(201).json(motoNew);
     } catch (error) {
       this.next(error);
+    }
+  };
+  public allGet = async () => {
+    try {
+      const { message, status } = await this.service.allGet();
+
+      return this.res.status(status).json(message);
+    } catch (error) {
+      this.next(error);
+    }
+  };
+  public idGetBy = async () => {
+    const { id } = this.req.params;
+    try {
+      const moto = await this.service.idGetBy(id);
+
+      if (!moto) return this.res.status(404).json({ message: 'Motorcycle not found' });
+
+      return this.res.status(200).json(moto);
+    } catch (error) {
+      return this.res.status(422).json({ message: 'Invalid mongo id' });
     }
   };
 }
