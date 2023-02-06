@@ -62,7 +62,7 @@ Tests with 100% coverage of the project have also been developed using the tools
 ```
 npm run test:coverage
 ```
-within the root folder of the project, outside of the Docker terminal*. After running the command, all tests created by me will be displayed to obtain 100% coverage of the project.
+within the root folder of the project, outside of the Docker terminal*. After running the command, all tests created by me will be displayed to obtain the coverage of the project.
 \*  If you accessed the Docker terminal following the previous commands, you can type "exit" without quotes and press Enter. You will exit the Docker terminal. If your terminal is stuck (unable to type), you can press Ctrl + C and then type the "exit" to exit the Docker terminal.
 
 
