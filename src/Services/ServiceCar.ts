@@ -36,14 +36,19 @@ export default class CarService {
     const carODM = new CarODM();
 
     const updatedCart = await carODM.update(id, carChanged);
-
     if (!updatedCart) {
       return null;
     }
-
     return {
       id,
       ...carChanged,
     };
+  };
+  public carDelete = async (id: string) => {
+    const ODMcar = new CarODM();
+    const car = await this.idGetBy(id);
+    if (!car) return { message: 'Car not found' };
+    await ODMcar.delete(id);
+    return null;
   };
 }

@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import ICar from '../Interfaces/ICar';
 import ServiceCar from '../Services/ServiceCar';
 
+const INVALID_MONGO_ID = 'Invalid mongo id';
+
 export default class CarController {
   private req: Request;
   private res: Response;
@@ -34,7 +36,6 @@ export default class CarController {
   };
   public idGetBy = async () => {
     const { id } = this.req.params;
-
     try {
       const car = await this.service.idGetBy(id);
 
@@ -42,7 +43,7 @@ export default class CarController {
 
       return this.res.status(200).json(car);
     } catch (error) {
-      return this.res.status(422).json({ message: 'Invalid mongo id' });
+      return this.res.status(422).json({ message: INVALID_MONGO_ID });
     }
   };
   public update = async () => {
@@ -55,7 +56,22 @@ export default class CarController {
 
       return this.res.status(200).json(updatedCar);
     } catch (error) {
-      return this.res.status(422).json({ message: 'Invalid mongo id' });
+      return this.res.status(422).json({ message: INVALID_MONGO_ID });
+    }
+  };
+  public delete = async () => {
+    const { id } = this.req.params;
+
+    try {
+      const result = await this.service.carDelete(id);
+      
+      if (result) {
+        return this.res.status(404).json(result);
+      }
+
+      return this.res.sendStatus(204);
+    } catch (error) {
+      return this.res.status(422).json({ message: INVALID_MONGO_ID });
     }
   };
 }
