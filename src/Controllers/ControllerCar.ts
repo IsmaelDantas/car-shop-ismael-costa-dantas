@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import ICar from '../Interfaces/ICar';
-// import ExceptionHttp from '../util/exception.http';
 import ServiceCar from '../Services/ServiceCar';
 
 export default class CarController {
@@ -17,15 +16,7 @@ export default class CarController {
   }
 
   public create = async () => {
-    const car: ICar = {
-      model: this.req.body.model,
-      year: this.req.body.year,
-      color: this.req.body.color,
-      status: this.req.body.status,
-      buyValue: this.req.body.buyValue,
-      doorsQty: this.req.body.doorsQty,
-      seatsQty: this.req.body.seatsQty,
-    };
+    const car: ICar = this.req.body;
     try {
       const carNew = await this.service.carCreate(car);
       return this.res.status(201).json(carNew);
