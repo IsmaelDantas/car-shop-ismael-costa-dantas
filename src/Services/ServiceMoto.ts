@@ -7,15 +7,18 @@ export default class MotorCycle {
     if (moto) {
       return new Motorcycle(moto);
     }
+
     return null;
   };
 
   public motoCreate = async (moto: IMotorcycle) => {
     const ODMcar = new MotoODM();
+
     const createdCar = await ODMcar.create({
       ...moto,
       status: moto.status || false,
     });
+    
     return this.domainMotoCreate(createdCar);
   };
 }

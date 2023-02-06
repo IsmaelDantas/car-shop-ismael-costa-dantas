@@ -36,6 +36,24 @@ describe('ServiceCar tests', function () {
       expect(result).to.be.deep.equal(mockOutputCar[0]);
     });
   });
+  describe('Tests with PUT in the route /cars', function () {
+    it('Should change an car with sucess', async function () {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(mockOutputCar[0]);
+      const service = new ServiceCar();
+      const result = await service.carUpdate('1', mockOutputCar[1]);
+      expect(result).to.be.deep.equal(mockOutputCar[1]);
+    });
+    it('Should fail trying to change a car that not exist', async function () {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(null);
+      try {
+        const service = new ServiceCar();
+
+        await service.carUpdate('2', mockOutputCar[1]);
+      } catch (error) {
+        expect((error as Error).message).to.be.equal('Car not found');
+      }
+    });
+  });
   afterEach(function () {
     sinon.restore();
   });
