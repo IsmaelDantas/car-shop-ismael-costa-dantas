@@ -39,6 +39,7 @@ SOLID is an accelerator that makes the code more cohesive and easier to maintain
 - Liskov Substitution Principle;
 - Interface Segregation Principle;
 - Dependency Inversion Principle;
+
 For more details, I suggest you consult this <a href="https://en.wikipedia.org/wiki/SOLID" target="_blank">link</a>.
 
 # Application Functioning
